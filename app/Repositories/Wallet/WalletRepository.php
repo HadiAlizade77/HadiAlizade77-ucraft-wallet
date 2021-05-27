@@ -53,6 +53,6 @@ class WalletRepository extends EloquentRepository implements WalletRepositoryInt
 
     public function getWalletTransactions($walletId) : Collection
     {
-        return $this->find($walletId)->transactions;
+        return $this->find($walletId)->transactions()->with(['wallet'])->get();
     }
 }

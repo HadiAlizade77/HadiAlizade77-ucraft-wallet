@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { formatMoneyValue } from '@/lib/Wallet';
 import DataTable from '@/components/Table/DataTable';
 import { useSelector } from 'react-redux';
+import TransactionDialog from "../../components/Transaction/TransactionDialog";
 export default function List({ match, deleteHandler, fetchWalletTransactions }) {
     const state = useSelector((state) => state);
     const walletId = match.params.walletId;
@@ -9,7 +10,16 @@ export default function List({ match, deleteHandler, fetchWalletTransactions }) 
     useEffect(() => {
         fetchWalletTransactions(walletId);
     }, []);
+    const [transactionDialog, setTransactionDialog] = React.useState({
+        status: false,
+        id: 0
+    });
     const columns = [
+        {
+            id: 'wallet',
+            label: 'Wallet',
+            format: (value) => value.name
+        },
         {
             id: 'amount',
             label: 'Amount',
@@ -17,13 +27,30 @@ export default function List({ match, deleteHandler, fetchWalletTransactions }) 
             format: (value) => formatMoneyValue(value)
         },
         {
-            id: 'comment',
-            label: 'Comment',
-            minWidth: 170
-        },
-        {
             id: 'transaction_type',
             label: 'Type',
+            minWidth: 170,
+            // eslint-disable-next-line react/display-name
+            format: (value) => {
+                if (value === 'credit') {
+                    return (
+                        <span className="text-green-400">
+                            <i className="fas fa-arrow-alt-circle-up "></i>
+                            {value.toUpperCase()}
+                        </span>
+                    );
+                }
+                return (
+                    <span className="text-red-500">
+                        <i className="fas fa-arrow-alt-circle-down "></i>
+                        {value.toUpperCase()}
+                    </span>
+                );
+            }
+        },
+        {
+            id: 'comment',
+            label: 'Comment',
             minWidth: 170
         }
     ];
@@ -36,12 +63,28 @@ export default function List({ match, deleteHandler, fetchWalletTransactions }) 
                             deleteHandler={(id) => {
                                 deleteHandler(id);
                             }}
+                            handleEdit={(id) => {
+                                setTransactionDialog({ status: true, id });
+                            }}
                             rows={state.wallet.walletTransactions[walletId]}
                             columns={columns}
                         />
                     ) : null}
                 </div>
             </div>
+            <TransactionDialog
+                walletId="0"
+                dialogStatus={transactionDialog.status}
+                itemId={transactionDialog.id}
+                transactionType="0"
+                isEdit
+                closeDialog={() => {
+                    setTransactionDialog({ ...transactionDialog, status: false });
+                }}
+                fetchData={() => {
+                    fetchWalletTransactions(walletId);
+                }}
+            />
         </div>
     );
 }

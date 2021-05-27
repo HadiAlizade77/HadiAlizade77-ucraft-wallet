@@ -43,7 +43,7 @@ export default function TransactionDialog({
                     transactionType: transactionInfo.transaction_type,
                     amount: transactionInfo.amount,
                     walletId: transactionInfo.wallet_id,
-                    comment: transactionInfo.comment,
+                    comment: transactionInfo.comment || '',
                     id: transactionInfo.id
                 });
             });

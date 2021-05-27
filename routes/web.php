@@ -1,6 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\SocialController;
+use App\Http\Controllers\ApplicationController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +16,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('login/{provider}',  [SocialController::class, 'redirectSocial'])
+    ->name('social.auth');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/{any}', [ApplicationController::class,'index'])->where('any', '.*');;
+
+Route::get('/auth/verify',[ApplicationController::class,'index'])->name('verification.verify');;

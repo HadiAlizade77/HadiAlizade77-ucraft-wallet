@@ -27,6 +27,7 @@ Please run these commands in order to run the application
 ```php artisan migrate:fresh --seed```
 
 ###Environment Configuration
+
 Feel free to change the Environment configuration
 in the .env file
 

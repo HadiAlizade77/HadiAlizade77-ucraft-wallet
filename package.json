@@ -1,18 +1,79 @@
 {
-    "private": true,
-    "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
+    "name": "ucraft-wallet",
+    "version": "1.1.0",
+    "license": "MIT",
+    "dependencies": {
+        "@craco/craco": "^6.1.2",
+        "@fortawesome/fontawesome-free": "5.15.3",
+        "@material-ui/core": "^4.11.4",
+        "@popperjs/core": "2.9.1",
+        "@tailwindcss/forms": "0.2.1",
+        "@testing-library/jest-dom": "^4.2.4",
+        "@testing-library/react": "^9.3.2",
+        "@testing-library/user-event": "^7.1.2",
+        "autoprefixer": "10.2.5",
+        "axios": "^0.21.1",
+        "cross-env": "^7.0.3",
+        "css-loader": "^5.2.5",
+        "eslint-friendly-formatter": "^4.0.1",
+        "eslint-loader": "^4.0.2",
+        "laravel-mix": "^6.0.19",
+        "notistack": "^1.0.9",
+        "postcss": "8.2.8",
+        "postcss-loader": "^5.3.0",
+        "react": "17.0.1",
+        "react-dom": "17.0.1",
+        "react-redux": "^7.2.4",
+        "react-router": "5.2.0",
+        "react-router-dom": "5.2.0",
+        "redux": "^4.1.0",
+        "redux-devtools-extension": "^2.13.9",
+        "redux-thunk": "^2.3.0",
+        "style-loader": "^2.0.0",
+        "tailwindcss": "2.0.4"
     },
     "devDependencies": {
-        "axios": "^0.21",
-        "laravel-mix": "^6.0.6",
-        "lodash": "^4.17.19",
-        "postcss": "^8.1.14"
+        "webpack": "^5.37.1",
+        "webpack-cli": "^4.7.0",
+        "webpack-dev-server": "^3.11.2",
+        "@babel/preset-react": "^7.13.13",
+        "@pmmmwh/react-refresh-webpack-plugin": "^0.5.0-beta.8",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.18.0",
+        "eslint-config-prettier": "^7.1.0",
+        "eslint-config-react-app": "^6.0.0",
+        "eslint-plugin-prettier": "^3.3.1",
+        "eslint-plugin-react": "^7.22.0",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "prettier": "^2.2.1",
+        "react-refresh": "^0.10.0"
+    },
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run build:tailwind && npm start",
+        "build:tailwind": "tailwind build resources/js/src/assets/styles/index.css -o resources/js/src/assets/styles/tailwind.css"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "optionalDependencies": {
+        "typescript": "4.2.3"
     }
 }

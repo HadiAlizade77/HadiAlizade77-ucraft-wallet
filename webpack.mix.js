@@ -1,5 +1,7 @@
 const mix = require('laravel-mix');
-
+// const tailwindcss = require('tailwindcss')
+require('dotenv').config();
+const path = require('path');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,7 +13,36 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        //
-    ]);
+mix.webpackConfig({
+    resolve: {
+        modules: [
+            path.resolve(__dirname, 'node_modules'),
+            path.resolve(__dirname, 'resources/js/src')
+        ],
+        alias: {
+            '@': path.resolve(__dirname, 'resources/js/src'),
+            '@assets': path.resolve(__dirname, 'resources/assets')
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.(jsx|js|vue)$/,
+                loader: 'eslint-loader',
+                enforce: 'pre',
+                exclude: /(node_modules)/,
+                options: {
+                    formatter: require('eslint-friendly-formatter')
+                }
+            }
+        ]
+    }
+})
+    .setPublicPath('public')
+    // This will copy files from static folder
+    // directly into dist folder
+    .copy('resources/js/src/assets', 'public')
+    // This will process our entry point (app.js)
+    // into the dist/js folder
+    .js('resources/js/src/index.js', 'public/js')
+    .react();

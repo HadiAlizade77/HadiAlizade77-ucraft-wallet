@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { formatMoneyValue } from '@/lib/Wallet';
 import DataTable from '@/components/Table/DataTable';
 import { useSelector } from 'react-redux';
-import TransactionDialog from "../../components/Transaction/TransactionDialog";
+import TransactionDialog from '../../components/Transaction/TransactionDialog';
 export default function List({ match, deleteHandler, fetchWalletTransactions }) {
     const state = useSelector((state) => state);
     const walletId = match.params.walletId;

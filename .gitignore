@@ -12,3 +12,17 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+/public/js
+/public/css
+/public/fonts
+.env.testing
+/.idea
+storage/debugbar/
+.DS_Store
+/public/mix-manifest.json
+.vapor/
+.env.production
+.env.staging
+.php_cs.cache
+.env.production-2
+.jsconfig.json

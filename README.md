@@ -33,8 +33,8 @@ To run the application you need to simply run ``` php aritisan serve ``` or foll
   
 add it to your /etc/hosts  
   
-`127.0.0.1       wallet-test.loc`   
-`127.0.0.1       www.wallet-test.loc`  
+`127.0.0.1       wallet-test-loc.com`   
+`127.0.0.1       www.wallet-test-loc.com`  
   
   
 nginx deploy  
@@ -45,7 +45,7 @@ server {
     listen 80;  
     listen [::]:80;  
      
-    server_name  www.wallet-test.loc;  
+    server_name  www.wallet-test-loc.com;  
   
     root /var/www/wallet-test/public;  
     index  index.php index.html index.htm;  

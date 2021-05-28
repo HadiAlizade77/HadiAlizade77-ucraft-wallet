@@ -29,7 +29,7 @@ Route::post('/verify-email', [VerifyEmailController::class,'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthenticatedSessionController::class,'show']);
-    Route::group(['namespace' => 'API'], function () {
+    Route::group(['namespace' => 'API','middleware' => ['verified']], function () {
         Route::group(['prefix' => 'v1', 'namespace' => 'v1'], function () {
                 Route::group(['prefix' => 'wallet'], function () {
                     Route::get('transactions/{walletId}', [WalletController::class, 'walletTransactions'])->name('.index');

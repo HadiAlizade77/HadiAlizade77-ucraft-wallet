@@ -22,3 +22,4 @@ Route::get('login/{provider}',  [SocialController::class, 'redirectSocial'])
 Route::get('/{any}', [ApplicationController::class,'index'])->where('any', '.*');;
 
 Route::get('/auth/verify',[ApplicationController::class,'index'])->name('verification.verify');;
+Route::get('/auth/unverified',[ApplicationController::class,'index'])->name('verification.notice');;

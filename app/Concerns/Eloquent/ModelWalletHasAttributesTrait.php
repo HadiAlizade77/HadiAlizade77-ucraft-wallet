@@ -15,7 +15,6 @@ trait ModelWalletHasAttributesTrait
      */
     public function getBalanceAttribute(): float
     {
-//        dd($this->transactions()->get()->toArray());
         $balance = 0;
         $transactions = $this->transactions()->get();
         foreach ($transactions as $transaction) {

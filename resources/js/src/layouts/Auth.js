@@ -12,6 +12,7 @@ import Login from 'views/auth/Login.js';
 import Register from 'views/auth/Register.js';
 import Authentication from 'views/auth/Authenticate.js';
 import VerifyEmail from 'views/auth/VerifyEmail.js';
+import UnverifiedEmail from 'views/auth/UnverifiedEmail.js';
 
 export default function Auth({
     registerWithCredentials,
@@ -66,6 +67,7 @@ export default function Auth({
                                 <VerifyEmail {...props} verifyEmail={callToVerifyEmail} />
                             )}
                         />
+                        <Route path="/auth/unverified" exact component={UnverifiedEmail} />
                         <Redirect from="/auth" to="/auth/login" />
                     </Switch>
                     <FooterSmall absolute />

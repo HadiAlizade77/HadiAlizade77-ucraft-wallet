@@ -36,6 +36,9 @@ createdAxios.interceptors.response.use(
             localStorage.removeItem('token');
             location.reload();
         }
+        if (error.response.status === 403) {
+            window.location.href = '/auth/unverified';
+        }
         return Promise.reject(error.response);
     }
 );
